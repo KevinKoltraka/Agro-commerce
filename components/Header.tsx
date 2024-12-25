@@ -98,10 +98,9 @@ const Header = () => {
           <Link href="/">
             <Image
               src="/logo.avif"
-              width={130}
-              height={130}
+              width={100}
+              height={100}
               alt="singitronic logo"
-              className="w-56 h-auto"
             />
           </Link>
           <div className="flex gap-x-5 items-center">
@@ -109,7 +108,7 @@ const Header = () => {
             <div className="dropdown dropdown-end">
               <div tabIndex={0} role="button" className="w-10">
                 <Image
-                  src="/randomuser.jpg"
+                  src="/ubt.jpeg"
                   alt="random profile photo"
                   width={30}
                   height={30}

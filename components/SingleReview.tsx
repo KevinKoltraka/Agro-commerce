@@ -14,7 +14,7 @@ const SingleReview = () => {
         width={40}
         height={40}
           className="w-10 h-10 me-4 rounded-full"
-          src="/randomuser.jpg"
+          src="/ubt.jpeg"
           alt="user image"
         />
         <div className="font-medium dark:text-white">

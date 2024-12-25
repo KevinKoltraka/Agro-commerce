@@ -349,8 +349,8 @@ const AdminSingleOrder = () => {
               <Image
                 src={product?.product?.mainImage ? `/${product?.product?.mainImage}` : "/product_placeholder.jpg"}
                 alt={product?.product?.title}
-                width={50}
-                height={50}
+                width={130}
+                height={130}
                 className="w-auto h-auto"
               />
               <div>
@@ -374,7 +374,7 @@ const AdminSingleOrder = () => {
           <div className="flex gap-x-2 max-sm:flex-col mt-5">
             <button
               type="button"
-              className="uppercase bg-blue-500 px-10 py-5 text-lg border border-black border-gray-300 font-bold text-white shadow-sm hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2"
+              className="uppercase bg-green-500 px-10 py-5 text-lg border border-black border-gray-300 font-bold text-white shadow-sm hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2"
               onClick={updateOrder}
             >
               Update order
