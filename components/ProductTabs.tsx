@@ -65,11 +65,6 @@ const ProductTabs = ({ product }: { product: Product }) => {
                       : "No category"}
                   </td>
                 </tr>
-                {/* row 3 */}
-                <tr>
-                  <th>Color:</th>
-                  <td>Silver, LightSlateGray, Blue</td>
-                </tr>
               </tbody>
             </table>
           </div>

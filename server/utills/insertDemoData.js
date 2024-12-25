@@ -5,226 +5,137 @@ const prisma = new PrismaClient();
 const demoProducts = [
   {
     id: "1",
-    title: "Smart phone",
-    price: 22,
+    title: "Brokoli & Lulelaker / Domate / Karrota / Kunguj",
+    price: 7.70,
     rating: 5,
-    description: "This is smart phone description",
-    mainImage: "product1.webp",
-    slug: "smart-phone-demo",
-    manufacturer: "Samsung",
+    description: "(Pako 100 cope)",
+    mainImage: "vegetables.jpg?v=2",
+    slug: "fara-perime-demo",
+    manufacturer: "UBT AgroMarket",
     categoryId: "3117a1b0-6369-491e-8b8b-9fdd5ad9912e",
-    inStock: 0,
+    inStock: 1,
   },
   {
     id: "2",
-    title: "SLR camera",
-    price: 24,
-    rating: 0,
-    description: "This is slr description",
-    mainImage: "product2.webp",
-    slug: "slr-camera-demo",
-    manufacturer: "Canon",
+    title: "Planterra 12-12-17+2MgO+TE 25kg",
+    price: 25,
+    rating: 5,
+    description: "Pleh kokrrizor me formulë të balancuar, për Pemë Frutore të ndryshme, Agrume, Perime, etj.",
+    mainImage: "planterra.jpg?v=2",
+    slug: "planterra-f1-demo",
+    manufacturer: "UBT AgroMarket",
     categoryId: "659a91b9-3ff6-47d5-9830-5e7ac905b961",
-    inStock: 0,
+    inStock: 1,
   },
   {
     id: "3",
-    title: "Mixer grinder",
-    price: 25,
+    title: "Fungicide / Insekticide / Herbicide",
+    price: 28,
     rating: 4,
-    description: "This is mixed grinder description",
-    mainImage: "product3.webp",
-    slug: "mixed-grinder-demo",
-    manufacturer: "ZunVolt",
+    description: "Fungicide - Ridomil Gold, Dithane M-45 / Insekticide - Decis, Karate Zeon / Herbicide - Roundup",
+    mainImage: "pesticide.jpeg?v=2",
+    slug: "pesticide-demo",
+    manufacturer: "UBT AgroMarket",
     categoryId: "6c3b8591-b01e-4842-bce1-2f5585bf3a28",
     inStock: 1,
   },
   {
     id: "4",
-    title: "Phone gimbal",
-    price: 21,
+    title: "Frezë Italiane CELLI, 310cm seria e rëndë",
+    price: 15000,
     rating: 5,
-    description: "This is phone gimbal description",
-    mainImage: "product4.webp",
-    slug: "phone-gimbal-demo",
-    manufacturer: "Samsung",
+    description: "Frezë CELLI PIONEER 140 italiane, për traktorë 120-160 KF, gjerësi punuese 310 cm, thellësi 25 cm, kambio 4 shpejtësi, transmision me friksion, rul Packer Φ 470, peshë 1540 kg.",
+    mainImage: "freze.jpeg?v=2",
+    slug: "freze-demo",
+    manufacturer: "UBT AgroMarket",
     categoryId: "d30b85e2-e544-4f48-8434-33fe0b591579",
     inStock: 1,
   },
   {
     id: "5",
-    title: "Tablet keyboard",
-    price: 52,
-    rating: 4,
-    description: "This is tablet keyboard description",
-    mainImage: "product5.webp",
-    slug: "tablet-keyboard-demo",
-    manufacturer: "Samsung",
+    title: "Dem Race Limousine për Mbarështim",
+    price: 1200,
+    rating: 5,
+    description: "Dem Limousine, i shëndetshëm dhe me cilësi të lartë për mbarështim",
+    mainImage: "dem.jpg?v=2",
+    slug: "dem-race-demo",
+    manufacturer: "UBT AgroMarket",
     categoryId: "ada699e5-e764-4da0-8d3e-18a8c8c5ed24",
     inStock: 1,
   },
   {
     id: "6",
-    title: "Wireless earbuds",
-    price: 74,
-    rating: 3,
-    description: "This is earbuds description",
-    mainImage: "product6.webp",
-    slug: "wireless-earbuds-demo",
-    manufacturer: "Samsung",
+    title: "Fare Misri PR32B10 nga gjigandi Pioneer",
+    price: 40,
+    rating: 5,
+    description: "Fare misri PR32B10 është një hibrid i bardhë me kapacitet të lartë prodhues, sistem rrënjor të fuqishëm dhe kokrra me përmbajtje të lartë proteinash, i përshtatshëm për terrene të ndryshme.",
+    mainImage: "misri.jpg?v=2",
+    slug: "fare-misri-demo",
+    manufacturer: "UBT AgroMarket",
     categoryId: "1cb9439a-ea47-4a33-913b-e9bf935bcc0b",
     inStock: 1,
   },
   {
     id: "7",
-    title: "Party speakers",
-    price: 35,
+    title: "Serë ne shitje",
+    price: 4,
     rating: 5,
-    description: "This is party speakers description",
-    mainImage: "product7.webp",
-    slug: "party-speakers-demo",
-    manufacturer: "SOWO",
+    description: "5 USD për 200–499 metra katrorë, 4.5 USD për 500–799 metra katrorë, 4 USD për 800–999 metra katrorë, 3.8 USD për 1000–1999 metra katrorë, 3.5 USD për ≥2000 metra katrorë.",
+    mainImage: "sera.jpg?v=2",
+    slug: "sera-demo",
+    manufacturer: "UBT AgroMarket",
     categoryId: "7a241318-624f-48f7-9921-1818f6c20d85",
     inStock: 1,
   },
-  {
-    id: "8",
-    title: "Slow juicer",
-    price: 69,
-    rating: 5,
-    description: "Slow juicer desc",
-    mainImage: "product8.webp",
-    slug: "slow-juicer-demo",
-    manufacturer: "Bosch",
-    categoryId: "8d2a091c-4b90-4d60-b191-114b895f3e54",
-    inStock: 1,
-  },
-  {
-    id: "9",
-    title: "Wireless headphones",
-    price: 89,
-    rating: 3,
-    description: "This is wireless headphones description",
-    mainImage: "product9.webp",
-    slug: "wireless-headphones-demo",
-    manufacturer: "Sony",
-    categoryId: "4c2cc9ec-7504-4b7c-8ecd-2379a854a423",
-    inStock: 1,
-  },
-  {
-    id: "10",
-    title: "Smart watch",
-    price: 64,
-    rating: 3,
-    description: "This is smart watch description",
-    mainImage: "product10.webp",
-    slug: "smart-watch-demo",
-    manufacturer: "Samsung",
-    categoryId: "a6896b67-197c-4b2a-b5e2-93954474d8b4",
-    inStock: 1,
-  },
-  {
-    id: "11",
-    title: "Notebook horizon",
-    price: 52,
-    rating: 5,
-    description: "This is notebook description",
-    mainImage: "product11.webp",
-    slug: "notebook-horizon-demo",
-    manufacturer: "HP",
-    categoryId: "782e7829-806b-489f-8c3a-2689548d7153",
-    inStock: 1,
-  },
-  {
-    id: "12",
-    title: "Mens trimmer",
-    price: 54,
-    rating: 5,
-    description: "This is trimmer description",
-    mainImage: "product12.webp",
-    slug: "mens-trimmer-demo",
-    manufacturer: "Gillete",
-    categoryId: "313eee86-bc11-4dc1-8cb0-6b2c2a2a1ccb",
-    inStock: 0,
-  }
 ];
 
 
 const demoCategories = [
   {
-    id: "7a241318-624f-48f7-9921-1818f6c20d85",
-    name: "speakers",
-  },
-  {
-    id: "313eee86-bc11-4dc1-8cb0-6b2c2a2a1ccb",
-    name: "trimmers",
-  },
-  {
-    id: "782e7829-806b-489f-8c3a-2689548d7153",
-    name: "laptops",
-  },
-  {
-    id: "a6896b67-197c-4b2a-b5e2-93954474d8b4",
-    name: "watches",
-  },
-  {
-    id: "4c2cc9ec-7504-4b7c-8ecd-2379a854a423",
-    name: "headphones",
-  },
-  {
-    id: "8d2a091c-4b90-4d60-b191-114b895f3e54",
-    name: "juicers",
+    id: "ada699e5-e764-4da0-8d3e-18a8c8c5ed24",
+    name: "Blegtoria",
   },
   {
     id: "1cb9439a-ea47-4a33-913b-e9bf935bcc0b",
-    name: "earbuds",
-  },
-  {
-    id: "ada699e5-e764-4da0-8d3e-18a8c8c5ed24",
-    name: "tablets",
-  },
-  {
-    id: "d30b85e2-e544-4f48-8434-33fe0b591579",
-    name: "phone-gimbals",
-  },
-  {
-    id: "6c3b8591-b01e-4842-bce1-2f5585bf3a28",
-    name: "mixer-grinders",
-  },
-  {
-    id: "659a91b9-3ff6-47d5-9830-5e7ac905b961",
-    name: "cameras",
+    name: "FaraMisri",
   },
   {
     id: "3117a1b0-6369-491e-8b8b-9fdd5ad9912e",
-    name: "smart-phones",
+    name: "FaraPerime",
   },
   {
-    id: "da6413b4-22fd-4fbb-9741-d77580dfdcd5",
-    name: "mouses"
+    id: "d30b85e2-e544-4f48-8434-33fe0b591579",
+    name: "Mjetet",
   },
   {
-    id: "ss6412b4-22fd-4fbb-9741-d77580dfdcd2",
-    name: "computers"
+    id: "6c3b8591-b01e-4842-bce1-2f5585bf3a28",
+    name: "Pesticidet",
   },
   {
-    id: "fs6412b4-22fd-4fbb-9741-d77512dfdfa3",
-    name: "printers"
-  }
+    id: "659a91b9-3ff6-47d5-9830-5e7ac905b961",
+    name: "PlehraKimike",
+  },
+  {
+    id: "7a241318-624f-48f7-9921-1818f6c20d85",
+    name: "Serat",
+  },
 ];
 
 async function insertDemoData() {
-  
   for (const category of demoCategories) {
-    await prisma.category.create({
-      data: category,
+    await prisma.category.upsert({
+      where: { id: category.id },  // Check if the category already exists by its ID
+      update: {},  // If it exists, don't update anything (you can add update logic if needed)
+      create: category,  // If it doesn't exist, create a new category
     });
   }
   console.log("Demo categories inserted successfully!");
-  
+
   for (const product of demoProducts) {
-    await prisma.product.create({
-      data: product,
+    await prisma.product.upsert({
+      where: { id: product.id },  // Check if the product already exists by its ID
+      update: {},  // If it exists, don't update anything (you can add update logic if needed)
+      create: product,  // If it doesn't exist, create a new product
     });
   }
   console.log("Demo products inserted successfully!");
@@ -238,3 +149,6 @@ insertDemoData()
   .finally(async () => {
     await prisma.$disconnect();
   });
+
+  const categories = await prisma.category.findMany();
+  console.log(categories);

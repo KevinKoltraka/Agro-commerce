@@ -1,17 +1,6 @@
-// *********************
-// Role of the component: Filters on shop page
-// Name of the component: Filters.tsx
-// Developer: Aleksandar Kuzmanovic
-// Version: 1.0
-// Component call: <Filters />
-// Input parameters: no input parameters
-// Output: stock, rating and price filter
-// *********************
-
 "use client";
 import React, { useEffect, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSortStore } from "@/app/_zustand/sortStore";
 import { usePaginationStore } from "@/app/_zustand/paginationStore";
 
@@ -28,31 +17,36 @@ const Filters = () => {
 
   // getting current page number from Zustand store
   const { page } = usePaginationStore();
+  const { sortBy } = useSortStore();
 
   const [inputCategory, setInputCategory] = useState<InputCategory>({
     inStock: { text: "instock", isChecked: true },
     outOfStock: { text: "outofstock", isChecked: true },
-    priceFilter: { text: "price", value: 3000 },
+    priceFilter: { text: "price", value: 20000 },
     ratingFilter: { text: "rating", value: 0 },
   });
-  const { sortBy } = useSortStore();
 
+  // Update URL with filters whenever inputCategory, sortBy or page changes
   useEffect(() => {
     const params = new URLSearchParams();
-    // setting URL params and after that putting them all in URL
+    // Setting URL params based on filter and store values
     params.set("outOfStock", inputCategory.outOfStock.isChecked.toString());
     params.set("inStock", inputCategory.inStock.isChecked.toString());
     params.set("rating", inputCategory.ratingFilter.value.toString());
     params.set("price", inputCategory.priceFilter.value.toString());
     params.set("sort", sortBy);
     params.set("page", page.toString());
+
+    // Update the URL with the query parameters
     replace(`${pathname}?${params}`);
-  }, [inputCategory, sortBy, page]);
+  }, [inputCategory, sortBy, page, pathname, replace]);
 
   return (
     <div>
       <h3 className="text-2xl mb-2">Filters</h3>
       <div className="divider"></div>
+      
+      {/* Availability Filters */}
       <div className="flex flex-col gap-y-1">
         <h3 className="text-xl mb-2">Availability</h3>
         <div className="form-control">
@@ -61,13 +55,10 @@ const Filters = () => {
               type="checkbox"
               checked={inputCategory.inStock.isChecked}
               onChange={() =>
-                setInputCategory({
-                  ...inputCategory,
-                  inStock: {
-                    text: "instock",
-                    isChecked: !inputCategory.inStock.isChecked,
-                  },
-                })
+                setInputCategory(prevState => ({
+                  ...prevState,
+                  inStock: { text: "instock", isChecked: !prevState.inStock.isChecked }
+                }))
               }
               className="checkbox"
             />
@@ -81,42 +72,36 @@ const Filters = () => {
               type="checkbox"
               checked={inputCategory.outOfStock.isChecked}
               onChange={() =>
-                setInputCategory({
-                  ...inputCategory,
-                  outOfStock: {
-                    text: "outofstock",
-                    isChecked: !inputCategory.outOfStock.isChecked,
-                  },
-                })
+                setInputCategory(prevState => ({
+                  ...prevState,
+                  outOfStock: { text: "outofstock", isChecked: !prevState.outOfStock.isChecked }
+                }))
               }
               className="checkbox"
             />
-            <span className="label-text text-lg ml-2 text-black">
-              Out of stock
-            </span>
+            <span className="label-text text-lg ml-2 text-black">Out of stock</span>
           </label>
         </div>
       </div>
 
       <div className="divider"></div>
+
+      {/* Price Filter */}
       <div className="flex flex-col gap-y-1">
         <h3 className="text-xl mb-2">Price</h3>
         <div>
           <input
             type="range"
             min={0}
-            max={3000}
+            max={20000}
             step={10}
             value={inputCategory.priceFilter.value}
             className="range"
             onChange={(e) =>
-              setInputCategory({
-                ...inputCategory,
-                priceFilter: {
-                  text: "price",
-                  value: Number(e.target.value),
-                },
-              })
+              setInputCategory(prevState => ({
+                ...prevState,
+                priceFilter: { text: "price", value: Number(e.target.value) }
+              }))
             }
           />
           <span>{`Max price: $${inputCategory.priceFilter.value}`}</span>
@@ -125,18 +110,19 @@ const Filters = () => {
 
       <div className="divider"></div>
 
+      {/* Rating Filter */}
       <div>
         <h3 className="text-xl mb-2">Minimum Rating:</h3>
         <input
           type="range"
           min={0}
-          max="5"
+          max={5}
           value={inputCategory.ratingFilter.value}
           onChange={(e) =>
-            setInputCategory({
-              ...inputCategory,
-              ratingFilter: { text: "rating", value: Number(e.target.value) },
-            })
+            setInputCategory(prevState => ({
+              ...prevState,
+              ratingFilter: { text: "rating", value: Number(e.target.value) }
+            }))
           }
           className="range range-info"
           step="1"

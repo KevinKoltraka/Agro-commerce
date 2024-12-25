@@ -1,64 +1,47 @@
 export const categoryMenuList = [
   {
     id: 1,
-    title: "Smart Phones",
-    src: "/smart phone icon.png",
-    href: "/shop/smart-phones"
+    title: "Fara Perime",
+    src: "/seed.gif",
+    href: "/shop/FaraPerime"
   },
   {
     id: 2,
-    title: "Tablets",
-    src: "/tablet icon.png",
-    href: "/shop/tablets"
+    title: "Plehra kimike",
+    src: "/pleh.gif",
+    href: "/shop/PlehraKimike"
   },
   {
     id: 3,
-    title: "Mouses",
-    src: "/mouse icon.png",
-    href: "/shop/mouses"
+    title: "Pesticidet",
+    src: "/pests.gif",
+    href: "/shop/Pesticidet"
   },
   {
     id: 4,
-    title: "Cameras",
-    src: "/camera icon.png",
-    href: "/shop/cameras"
+    title: "Mjetet",
+    src: "/tools.gif",
+    href: "/shop/Mjetet"
   },
   {
     id: 5,
-    title: "Smart Watches",
-    src: "/smart watch.png",
-    href: "/shop/watches"
+    title: "Blegtoria",
+    src: "/blegtori.png",
+    href: "/shop/Blegtoria"
   },
   {
     id: 6,
-    title: "Laptops",
-    src: "/laptop icon.png",
-    href: "/shop/laptops"
+    title: "Fara Misri",
+    src: "/seed.gif",
+    href: "/shop/FaraMisri"
   },
   {
     id: 7,
-    title: "PCs",
-    src: "/pc icon.png",
-    href: "/shop/computers"
+    title: "Serat",
+    src: "/sera.png",
+    href: "/shop/Serat"
   },
-  {
-    id: 8,
-    title: "Printers",
-    src: "/printers icon.png",
-    href: "/shop/printers"
-  },
-  {
-    id: 9,
-    title: "Earbuds",
-    src: "/ear buds icon.png",
-    href: "/shop/earbuds"
-  },
-  {
-    id: 10,
-    title: "Head Phones",
-    src: "/headphone icon.png",
-    href: "/shop/headphones"
-  },
+
 ];
 
 export const incentives = [

@@ -102,37 +102,30 @@ const DashboardProductDetails = ({
   };
 
   // fetching main product data including other product images
-  const fetchProductData = async () => {
-    fetch(`http://localhost:3001/api/products/${id}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setProduct(data);
-      });
-
-    const imagesData = await fetch(`http://localhost:3001/api/images/${id}`, {
-      cache: "no-store",
-    });
-    const images = await imagesData.json();
-    setOtherImages((currentImages) => images);
-  };
-
-  // fetching all product categories. It will be used for displaying categories in select category input
-  const fetchCategories = async () => {
-    fetch(`http://localhost:3001/api/categories`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setCategories(data);
-      });
-  };
-
   useEffect(() => {
+    // Fetching categories
+    const fetchCategories = async () => {
+      fetch(`http://localhost:3001/api/categories`)
+        .then((res) => res.json())
+        .then((data) => setCategories(data));
+    };
+  
+    // Fetching product data
+    const fetchProductData = async () => {
+      fetch(`http://localhost:3001/api/products/${id}`)
+        .then((res) => res.json())
+        .then((data) => setProduct(data));
+  
+      const imagesData = await fetch(`http://localhost:3001/api/images/${id}`, {
+        cache: "no-store",
+      });
+      const images = await imagesData.json();
+      setOtherImages(images);
+    };
+  
     fetchCategories();
     fetchProductData();
-  }, [id]);
+  }, [id]);  // Only 'id'
 
   return (
     <div className="bg-white flex justify-start max-w-screen-2xl mx-auto xl:h-full max-xl:flex-col max-xl:gap-y-5">
@@ -265,7 +258,7 @@ const DashboardProductDetails = ({
             type="file"
             className="file-input file-input-bordered file-input-lg w-full max-w-sm"
             onChange={(e) => {
-              const selectedFile = e.target.files[0];
+              const selectedFile = e.target.files ? e.target.files[0] : null;
 
               if (selectedFile) {
                 uploadFile(selectedFile);
