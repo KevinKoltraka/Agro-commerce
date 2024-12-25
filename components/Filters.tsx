@@ -22,7 +22,7 @@ const Filters = () => {
   const [inputCategory, setInputCategory] = useState<InputCategory>({
     inStock: { text: "instock", isChecked: true },
     outOfStock: { text: "outofstock", isChecked: true },
-    priceFilter: { text: "price", value: 20000 },
+    priceFilter: { text: "price", value: 500000 },
     ratingFilter: { text: "rating", value: 0 },
   });
 

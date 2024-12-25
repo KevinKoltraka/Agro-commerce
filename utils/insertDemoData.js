@@ -1,4 +1,5 @@
-const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from '@prisma/client';
+
 
 const prisma = new PrismaClient();
 
@@ -87,6 +88,54 @@ const demoProducts = [
     category: "Serat",
     inStock: 1,
   },
+  {
+    id: "8",
+    title: "Pompë Uji Centrifugale me Thithje Elektrike 20 Inç",
+    price: 280,
+    rating: 5,
+    description: "Pompa e ujit me thithje elektrike centrifugale 20 inç është një zgjidhje e fuqishme dhe efikase ujitëse e krijuar për aplikime bujqësore, duke siguruar rrjedhje të besueshme uji për sistemet e ujitjes në shkallë të gjerë.",
+    mainImage: "pompe.avif?v=2",
+    slug: "pompe-uji-demo",
+    manufacturer: "Bosch",
+    category: "Ujitje",
+    inStock: 1,
+  },
+  {
+    id: "9",
+    title: "Veshje",
+    price: 19,
+    rating: 3,
+    description: "Çizme të gjata rezistente ndaj ujit, të rehatshme dhe të përshtatshme për terrene të ndryshme dhe aktivitete në natyrë.",
+    mainImage: "cizme.webp?v=2",
+    slug: "veshje-demo",
+    manufacturer: "Monagri",
+    category: "Veshje",
+    inStock: 1,
+  },
+  {
+    id: "10",
+    title: "Ripe Robotics",
+    price: 450000,
+    rating: 5,
+    description: "Ripe Robotics është një robot autonom që grumbullon fruta në mënyrë efikase, duke përdorur inteligjencën artificiale për të optimizuar rendimentin dhe ulur kostot e punës.",
+    mainImage: "robot.jpg?v=2",
+    slug: "ripe-robotics-demo",
+    manufacturer: "Ripe Robotics",
+    category: "Teknologjia",
+    inStock: 1,
+  },
+  {
+    id: "11",
+    title: "Thermo King",
+    price: 52000,
+    rating: 5,
+    description: "This is notebook description",
+    mainImage: "frigorifer.jpg?v=2",
+    slug: "thermo-king-demo",
+    manufacturer: "Thermo King",
+    category: "Magazinimi",
+    inStock: 1,
+  },
 ];
 
 const demoCategories = [
@@ -111,36 +160,54 @@ const demoCategories = [
   {
     name: "Serat",
   },
+  {
+    name: "Ujitje",
+  },
+  {
+    name: "Veshje",
+  },
+  {
+    name: "Teknologjia",
+  },
+  {
+    name: "Magazinimi",
+  },
 ];
 
+
 async function insertDemoData() {
-  for (const product of demoProducts) {
-    await prisma.product.create({
-      data: product,
-    });
-  }
-  console.log("Demo products inserted successfully!");
+  try {
+    for (const product of demoProducts) {
+      await prisma.product.upsert({
+        where: { name: product.title },  // Use 'title' instead of 'name' for uniqueness
+        update: {},  // If the product already exists, don't update anything
+        create: product,
+      });
+    }
+    console.log("Demo products inserted successfully!");
 
-  for (const image of demoProductImages) {
-    await prisma.image.create({
-      data: image,
-    });
-  }
-  console.log("Demo images inserted successfully!");
+    // Assuming you have demoProductImages defined, otherwise remove this part
+    for (const image of demoProductImages) {
+      await prisma.image.upsert({
+        where: { url: image.url },  // Assuming 'url' is unique for images
+        update: {},
+        create: image,
+      });
+    }
+    console.log("Demo images inserted successfully!");
 
-  for (const category of demoCategories) {
-    await prisma.category.create({
-      data: category,
-    });
+    for (const category of demoCategories) {
+      await prisma.category.upsert({
+        where: { name: category.name },  // Assuming 'name' is unique for categories
+        update: {},
+        create: category,
+      });
+    }
+    console.log("Demo categories inserted successfully!");
+
+  } catch (error) {
+    console.error("Error inserting data:", error);
+  } finally {
+    await prisma.$disconnect();  // Ensure the Prisma client disconnects after execution
   }
-  console.log("Demo categories inserted successfully!");
 }
-
-insertDemoData()
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });

@@ -41,7 +41,24 @@ export const categoryMenuList = [
     src: "/sera.png",
     href: "/shop/Serat"
   },
-
+  {
+    id: 8,
+    title: "Ujitje",
+    src: "/ujitje.gif",
+    href: "/shop/Ujitje"
+  },
+  {
+    id: 9,
+    title: "Veshje",
+    src: "/veshje.png",
+    href: "/shop/Veshje"
+  },
+  {
+    id: 10,
+    title: "Teknologjia",
+    src: "/tech.png",
+    href: "/shop/Teknologjia"
+  },
 ];
 
 export const incentives = [

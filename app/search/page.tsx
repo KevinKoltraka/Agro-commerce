@@ -14,7 +14,7 @@ const SearchPage = async ({ searchParams: { search } }: Props) => {
   const products = await data.json();
 
   return (
-    <div>
+    <>
       <SectionTitle title="Search Page" path="Home | Search" />
       <div className="max-w-screen-2xl mx-auto">
         {search && (
@@ -34,12 +34,8 @@ const SearchPage = async ({ searchParams: { search } }: Props) => {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
 export default SearchPage;
-
-/*
-
-*/

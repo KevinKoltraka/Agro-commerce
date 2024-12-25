@@ -1,4 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -87,6 +87,54 @@ const demoProducts = [
     categoryId: "7a241318-624f-48f7-9921-1818f6c20d85",
     inStock: 1,
   },
+  {
+    id: "8",
+    title: "Pompë Uji Centrifugale me Thithje Elektrike 20 Inç",
+    price: 280,
+    rating: 5,
+    description: "Pompa e ujit me thithje elektrike centrifugale 20 inç është një zgjidhje e fuqishme dhe efikase ujitëse e krijuar për aplikime bujqësore, duke siguruar rrjedhje të besueshme uji për sistemet e ujitjes në shkallë të gjerë.",
+    mainImage: "pompe.avif?v=2",
+    slug: "pompe-uji-demo",
+    manufacturer: "Bosch",
+    categoryId: "8d2a091c-4b90-4d60-b191-114b895f3e54",
+    inStock: 1,
+  },
+  {
+    id: "9",
+    title: "Veshje",
+    price: 19,
+    rating: 3,
+    description: "Çizme të gjata rezistente ndaj ujit, të rehatshme dhe të përshtatshme për terrene të ndryshme dhe aktivitete në natyrë.",
+    mainImage: "cizme.webp?v=2",
+    slug: "veshje-demo",
+    manufacturer: "Monagri",
+    categoryId: "4c2cc9ec-7504-4b7c-8ecd-2379a854a423",
+    inStock: 1,
+  },
+  {
+    id: "10",
+    title: "Ripe Robotics",
+    price: 450000,
+    rating: 5,
+    description: "Ripe Robotics është një robot autonom që grumbullon fruta në mënyrë efikase, duke përdorur inteligjencën artificiale për të optimizuar rendimentin dhe ulur kostot e punës.",
+    mainImage: "robot.jpg?v=2",
+    slug: "ripe-robotics-demo",
+    manufacturer: "Ripe Robotics",
+    categoryId: "a6896b67-197c-4b2a-b5e2-93954474d8b4",
+    inStock: 1,
+  },
+  {
+    id: "11",
+    title: "Thermo King",
+    price: 52000,
+    rating: 5,
+    description: "Thermo King ofron sisteme ftohjeje dhe ngrohjeje për transportimin e produkteve bujqësore, duke siguruar ruajtjen e temperaturave optimale për freskinë e produkteve gjatë transportit.",
+    mainImage: "frigorifer.jpg?v=2",
+    slug: "thermo-king-demo",
+    manufacturer: "Thermo King",
+    categoryId: "313eee86-bc11-4dc1-8cb0-6b2c2a2a1ccb",
+    inStock: 1,
+  },
 ];
 
 
@@ -119,25 +167,50 @@ const demoCategories = [
     id: "7a241318-624f-48f7-9921-1818f6c20d85",
     name: "Serat",
   },
+  {
+    id: "8d2a091c-4b90-4d60-b191-114b895f3e54",
+    name: "Ujitje",
+  },
+  {
+    id: "4c2cc9ec-7504-4b7c-8ecd-2379a854a423",
+    name: "Veshje",
+  },
+  {
+    id: "a6896b67-197c-4b2a-b5e2-93954474d8b4",
+    name: "Teknologjia",
+  },
+  {
+    id: "313eee86-bc11-4dc1-8cb0-6b2c2a2a1ccb",
+    name: "Magazinimi",
+  },
 ];
 
 async function insertDemoData() {
+  // Use a Set to track categories by name (assuming `name` is unique)
+  const insertedCategories = new Set();
+
   for (const category of demoCategories) {
-    await prisma.category.upsert({
-      where: { id: category.id },  // Check if the category already exists by its ID
-      update: {},  // If it exists, don't update anything (you can add update logic if needed)
-      create: category,  // If it doesn't exist, create a new category
-    });
+    if (!insertedCategories.has(category.name)) {
+      await prisma.category.upsert({
+        where: { name: category.name },
+        update: {},
+        create: category,
+      });
+      insertedCategories.add(category.name);
+    }
   }
+
   console.log("Demo categories inserted successfully!");
 
+  // Ensure we use `id` for the unique key in `upsert` for products
   for (const product of demoProducts) {
     await prisma.product.upsert({
-      where: { id: product.id },  // Check if the product already exists by its ID
-      update: {},  // If it exists, don't update anything (you can add update logic if needed)
-      create: product,  // If it doesn't exist, create a new product
+      where: { id: product.id }, // Use 'id' instead of 'name' for unique key
+      update: {},
+      create: product,
     });
   }
+
   console.log("Demo products inserted successfully!");
 }
 
@@ -149,6 +222,3 @@ insertDemoData()
   .finally(async () => {
     await prisma.$disconnect();
   });
-
-  const categories = await prisma.category.findMany();
-  console.log(categories);
