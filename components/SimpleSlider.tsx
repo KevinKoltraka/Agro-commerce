@@ -1,19 +1,10 @@
-// *********************
-// Role of the component: Simple slider component built with the help of slick-carousel
-// Name of the component: SimpleSlider.tsx
-// Developer: Aleksandar Kuzmanovic
-// Version: 1.0
-// Component call: <SimpleSlider />
-// Input parameters: no input parameters
-// Output: Slider component built with the help of slick-carousel
-// *********************
-
 "use client";
 import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Link from "next/link";
+import Image from "next/image";
 
 function SimpleSlider() {
   const settings = {
@@ -23,6 +14,7 @@ function SimpleSlider() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+  
   return (
     <div className="slider-container max-w-screen-2xl mx-auto px-16 max-md:px-7">
       <Slider {...settings}>
@@ -42,7 +34,15 @@ function SimpleSlider() {
               Shop now
             </Link>
           </div>
-          <img src="/slider image 1.webp" alt="slider 1" className="h-full" />
+          {/* Replace <img> with <Image /> from Next.js */}
+          <Image 
+            src="/slider image 1.webp" 
+            alt="slider 1" 
+            className="h-full" 
+            width={1500} // Specify the width
+            height={500} // Specify the height
+            priority // Optional, for high-priority images
+          />
         </div>
         <div className="h-[500px] max-lg:h-[400px] max-md:h-[250px] max-[500px]:h-[200px] max-[400px]:h-[150px] relative">
           <div className="absolute left-[50%] translate-x-[-50%] translate-y-[30%] h-full text-center max-lg:translate-y-[25%] max-md:translate-y-[20%] max-sm:hidden">
@@ -59,7 +59,15 @@ function SimpleSlider() {
               Shop now
             </Link>
           </div>
-          <img src="/slider image 2.webp" alt="slider 1" className="h-full" />
+          {/* Replace <img> with <Image /> from Next.js */}
+          <Image 
+            src="/slider image 2.webp" 
+            alt="slider 2" 
+            className="h-full" 
+            width={1500} // Specify the width
+            height={500} // Specify the height
+            priority // Optional, for high-priority images
+          />
         </div>
       </Slider>
     </div>

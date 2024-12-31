@@ -1,8 +1,7 @@
 // *********************
 // Role of the component: Quantity input for incrementing and decrementing product quantity on the cart page
 // Name of the component: QuantityInputCart.tsx
-// Developer: Aleksandar Kuzmanovic
-// Version: 1.0
+// Developer: Kevin Koltraka
 // Component call: <QuantityInputCart product={product} />
 // Input parameters: { product: ProductInCart }
 // Output: one number input and two buttons

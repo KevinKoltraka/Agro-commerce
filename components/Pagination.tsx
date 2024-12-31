@@ -1,8 +1,7 @@
 // *********************
 // Role of the component: Pagination for navigating the shop page
 // Name of the component: Pagination.tsx
-// Developer: Aleksandar Kuzmanovic
-// Version: 1.0
+// Developer: Kevin Koltraka
 // Component call: <Pagination />
 // Input parameters: no input parameters
 // Output: Component with the current page and buttons for incrementing and decrementing page

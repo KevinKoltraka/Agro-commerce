@@ -84,25 +84,24 @@ export const incentives = [
 
 export const navigation = {
   sale: [
-    { name: "Discounts", href: "#" },
-    { name: "News", href: "#" },
-    { name: "Register Discounts", href: "#" },
+    { name: "Ofertat", href: "#" },
+    { name: "Njoftime", href: "#" },
   ],
   about: [
-    { name: "About Singitronic", href: "#" },
-    { name: "Work With Us", href: "#" },
-    { name: "Company Profile", href: "#" },
+    { name: "Rreth UBT AgroMarket", href: "#" },
+    { name: "Bashkpuno me ne", href: "#" },
+    { name: "Profili Kompanise", href: "#" },
   ],
   buy: [
-    { name: "Singitronic Loyalty Card", href: "#" },
+    { name: "UBT AgroMarket Karta e Besnikerise", href: "#" },
     { name: "Terms Of Use", href: "#" },
     { name: "Privacy Policy", href: "#" },
-    { name: "Complaints", href: "#" },
-    { name: "Partners", href: "#" },
+    { name: "Ankesat", href: "#" },
+    { name: "Partneret", href: "#" },
   ],
   help: [
-    { name: "Contact", href: "#" },
-    { name: "How to Buy at Singitronic", href: "#" },
+    { name: "Kontakt", href: "#" },
+    { name: "Si te blejme tek UBT AgroMarket", href: "#" },
     { name: "FAQ", href: "#" },
   ],
 };

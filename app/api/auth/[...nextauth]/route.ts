@@ -17,7 +17,12 @@ export const authOptions: any = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: any) {
+      async authorize(
+        credentials: Record<"email" | "password", string> | undefined
+      ) {
+        if (!credentials) {
+          return null; // Return null if credentials are undefined
+        }
 
         try {
           const user = await prisma.user.findFirst({
@@ -25,17 +30,27 @@ export const authOptions: any = {
               email: credentials.email,
             },
           });
+
           if (user) {
             const isPasswordCorrect = await bcrypt.compare(
               credentials.password,
               user.password!
             );
+
             if (isPasswordCorrect) {
-              return user;
+              return {
+                id: user.id,
+                email: user.email,
+                name: null, // Include `name` only if applicable
+                image: null, // Include `image` only if applicable
+              };
             }
           }
+
+          return null; // Explicitly return null if authentication fails
         } catch (err: any) {
-          throw new Error(err);
+          console.error("Error in authorize function:", err);
+          return null; // Return null in case of an error
         }
       },
     }),
@@ -48,53 +63,32 @@ export const authOptions: any = {
       clientId: process.env.GOOGLE_ID ?? "",
       clientSecret: process.env.GOOGLE_SECRET ?? "",
     }),
-    // ...add more providers here if you want. You can find them on nextauth website.
   ],
+
   callbacks: {
     async signIn({ user, account }: { user: AuthUser; account: Account }) {
-      if (account?.provider == "credentials") {
+      if (account?.provider === "credentials") {
         return true;
       }
-      if (account?.provider == "github") {
 
-        try {
-          const existingUser = await prisma.user.findFirst({ where: { email: user.email! } });
-          if (!existingUser) {
+      try {
+        const existingUser = await prisma.user.findFirst({
+          where: { email: user.email! },
+        });
 
-            await prisma.user.create({
-              data: {
-                id: nanoid() + "",
-                email: user.email!
-              },
-            });
-            return true;
-          }
-          return true;
-        } catch (err) {
-          console.log("Error saving user", err);
-          return false;
+        if (!existingUser) {
+          await prisma.user.create({
+            data: {
+              id: nanoid(),
+              email: user.email!,
+            },
+          });
         }
-      }
 
-      if (account?.provider == "google") {
-
-        try {
-          const existingUser = await prisma.user.findFirst({ where: { email: user.email! } });
-          if (!existingUser) {
-            await prisma.user.create({
-              data: {
-                id: nanoid() + "",
-                email: user.email!
-              },
-            });
-
-            return true;
-          }
-          return true;
-        } catch (err) {
-          console.log("Error saving user", err);
-          return false;
-        }
+        return true;
+      } catch (err) {
+        console.error("Error saving user:", err);
+        return false;
       }
     },
   },

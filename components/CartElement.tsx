@@ -1,8 +1,7 @@
 // *********************
 // Role of the component: Cart icon and quantity that will be located in the header
 // Name of the component: CartElement.tsx
-// Developer: Aleksandar Kuzmanovic
-// Version: 1.0
+// Developer: Kevin Koltraka
 // Component call: <CartElement />
 // Input parameters: no input parameters
 // Output: Cart icon and quantity
@@ -20,7 +19,7 @@ const CartElement = () => {
     <div className="relative">
             <Link href="/cart">
               <FaCartShopping className="text-2xl text-black" />
-              <span className="block w-6 h-6 bg-blue-600 text-white rounded-full flex justify-center items-center absolute top-[-17px] right-[-22px]">
+              <span className="block w-6 h-6 bg-green-600 text-white rounded-full flex justify-center items-center absolute top-[-17px] right-[-22px]">
                 { allQuantity }
               </span>
             </Link>

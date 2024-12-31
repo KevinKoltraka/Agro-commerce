@@ -1,8 +1,7 @@
 // *********************
 // Role of the component: Footer component
 // Name of the component: Footer.tsx
-// Developer: Aleksandar Kuzmanovic
-// Version: 1.0
+// Developer: Kevin Koltraka
 // Component call: <Footer />
 // Input parameters: no input parameters
 // Output: Footer component
@@ -32,7 +31,7 @@ const Footer = () => {
               <div className="md:grid md:grid-cols-2 md:gap-8">
                 <div>
                   <h3 className="text-lg font-bold leading-6 text-black-600">
-                    Sale
+                    Shitjet
                   </h3>
                   <ul role="list" className="mt-6 space-y-4">
                     {navigation.sale.map((item) => (
@@ -49,7 +48,7 @@ const Footer = () => {
                 </div>
                 <div className="mt-10 md:mt-0">
                   <h3 className="text-base font-bold leading-6 text-black-600">
-                    About Us
+                    Rreth Nesh
                   </h3>
                   <ul role="list" className="mt-6 space-y-4">
                     {navigation.about.map((item) => (
@@ -68,7 +67,7 @@ const Footer = () => {
               <div className="md:grid md:grid-cols-2 md:gap-8">
                 <div>
                   <h3 className="text-base font-bold leading-6 text-black-600">
-                    Buying
+                    Blerje
                   </h3>
                   <ul role="list" className="mt-6 space-y-4">
                     {navigation.buy.map((item) => (
@@ -85,7 +84,7 @@ const Footer = () => {
                 </div>
                 <div className="mt-10 md:mt-0">
                   <h3 className="text-base font-bold leading-6 text-black-600">
-                    Support
+                    Suport
                   </h3>
                   <ul role="list" className="mt-6 space-y-4">
                     {navigation.help.map((item) => (

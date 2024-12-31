@@ -1,19 +1,9 @@
-// *********************
-// Role of the component: Wishlist item component for wishlist page
-// Name of the component: WishItem.tsx
-// Developer: Aleksandar Kuzmanovic
-// Version: 1.0
-// Component call: <WishItem id={id} title={title} price={price} image={image} slug={slug} stockAvailabillity={stockAvailabillity} />
-// Input parameters: ProductInWishlist interface
-// Output: single wishlist item on the wishlist page
-// *********************
-
 "use client";
 import { useWishlistStore } from "@/app/_zustand/wishlistStore";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import toast from "react-hot-toast";
 import { FaHeartCrack } from "react-icons/fa6";
 import { deleteWishItem } from "@/app/actions";
@@ -41,7 +31,8 @@ const WishItem = ({
     router.push(`/product/${slug}`);
   };
 
-  const getUserByEmail = async () => {
+  // Memoize the getUserByEmail function to avoid re-renders
+  const getUserByEmail = useCallback(async () => {
     if (session?.user?.email) {
       fetch(`http://localhost:3001/api/users/email/${session?.user?.email}`, {
         cache: "no-store",
@@ -51,26 +42,24 @@ const WishItem = ({
           setUserId(data?.id);
         });
     }
-  };
+  }, [session?.user?.email]); // Add session email as dependency
 
   const deleteItemFromWishlist = async (productId: string) => {
-    
     if (userId) {
-
       fetch(`http://localhost:3001/api/wishlist/${userId}/${productId}`, {method: "DELETE"}).then(
         (response) => {
           removeFromWishlist(productId);
           toast.success("Item removed from your wishlist");
         }
       );
-    }else{
+    } else {
       toast.error("You need to be logged in to perform this action");
     }
   };
 
   useEffect(() => {
     getUserByEmail();
-  }, [session?.user?.email]);
+  }, [getUserByEmail]); // Add getUserByEmail as a dependency
 
   return (
     <tr className="hover:bg-gray-100 cursor-pointer">

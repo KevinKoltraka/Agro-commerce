@@ -167,7 +167,7 @@ const CheckoutPage = () => {
       toast.error("You don't have items in your cart");
       router.push("/cart");
     }
-  }, []);
+  }, [products.length, router]);
 
   return (
     <div className="bg-white">
@@ -660,7 +660,7 @@ const CheckoutPage = () => {
               <button
                 type="button"
                 onClick={makePurchase}
-                className="w-full rounded-md border border-transparent bg-blue-500 px-20 py-2 text-lg font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-gray-50 sm:order-last"
+                className="w-full rounded-md border border-transparent bg-green-500 px-20 py-2 text-lg font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-gray-50 sm:order-last mb-8"
               >
                 Pay Now
               </button>

@@ -1,8 +1,7 @@
 // *********************
 // Role of the component: Product table component on admin dashboard page
 // Name of the component: DashboardProductTable.tsx
-// Developer: Aleksandar Kuzmanovic
-// Version: 1.0
+// Developer: Kevin Koltraka
 // Component call: <DashboardProductTable />
 // Input parameters: no input parameters
 // Output: products table

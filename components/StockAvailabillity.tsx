@@ -1,8 +1,7 @@
 // *********************
 // Role of the component: Stock availability component for displaying current stock status of the product
 // Name of the component: StockAvailabillity.tsx
-// Developer: Aleksandar Kuzmanovic
-// Version: 1.0
+// Developer: Kevin Koltraka
 // Component call: <StockAvailabillity stock={stock} inStock={inStock} />
 // Input parameters: { stock: number, inStock: number }
 // Output: styled text that displays current stock status on the single product page

@@ -1,8 +1,7 @@
 // *********************
 // Role of the component: Single product tabs on the single product page containing product description, main product info and reviews
 // Name of the component: ProductTabs.tsx
-// Developer: Aleksandar Kuzmanovic
-// Version: 1.0
+// Developer: Kevin Koltraka
 // Component call: <ProductTabs product={product} />
 // Input parameters: { product: Product }
 // Output: Single product tabs containing product description, main product info and reviews

@@ -1,8 +1,7 @@
 // *********************
 // Role of the component: Checkbox input component
 // Name of the component: Checkbox.tsx
-// Developer: Aleksandar Kuzmanovic
-// Version: 1.0
+// Developer: Kevin Koltraka
 // Component call: <Checkbox text={text} stateValue={stateValue} setStateValue={setStateValue} />
 // Input parameters: { text: string, stateValue: any, setStateValue: any }
 // Output: checkbox input with label

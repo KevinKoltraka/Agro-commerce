@@ -1,8 +1,7 @@
 // *********************
 // Role of the component: products section intended to be on the home page
 // Name of the component: ProductsSection.tsx
-// Developer: Aleksandar Kuzmanovic
-// Version: 1.0
+// Developer: Kevin Koltraka
 // Component call: <ProductsSection slug={slug} />
 // Input parameters: no input parameters
 // Output: products grid
@@ -20,7 +19,7 @@ const ProductsSection = async () => {
     <div className="bg-gradient-to-l from-white to-green-300">
       <div className="max-w-screen-2xl mx-auto pt-20">
         <Heading title="PRODUKTE TE DALLUARA" />
-        <div className="grid grid-cols-4 justify-items-center max-w-screen-2xl mx-auto py-10 gap-x-2 px-10 gap-y-8 max-xl:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
+        <div className="grid grid-cols-2 justify-items-center max-w-screen-2xl mx-auto py-10 gap-x-2 px-10 gap-y-8 max-xl:grid-cols-2 max-md:grid-cols-2 max-sm:grid-cols-1">
           {products.map((product: Product) => (
             <ProductItem key={product.id} product={product} color="black" />
           ))}
