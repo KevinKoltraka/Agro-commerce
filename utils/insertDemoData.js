@@ -177,37 +177,53 @@ const demoCategories = [
 
 async function insertDemoData() {
   try {
-    for (const product of demoProducts) {
-      await prisma.product.upsert({
-        where: { name: product.title },  // Use 'title' instead of 'name' for uniqueness
-        update: {},  // If the product already exists, don't update anything
-        create: product,
-      });
-    }
-    console.log("Demo products inserted successfully!");
-
-    // Assuming you have demoProductImages defined, otherwise remove this part
-    for (const image of demoProductImages) {
-      await prisma.image.upsert({
-        where: { url: image.url },  // Assuming 'url' is unique for images
-        update: {},
-        create: image,
-      });
-    }
-    console.log("Demo images inserted successfully!");
-
+    console.log("Inserting demo categories...");
     for (const category of demoCategories) {
       await prisma.category.upsert({
-        where: { name: category.name },  // Assuming 'name' is unique for categories
-        update: {},
-        create: category,
+        where: { name: category.name }, // Assuming category name is unique
+        update: {}, // No updates required for existing categories
+        create: {
+          name: category.name,
+        },
       });
     }
     console.log("Demo categories inserted successfully!");
 
+    console.log("Inserting demo products...");
+    for (const product of demoProducts) {
+      // Ensure the product's category exists in the database
+      const category = await prisma.category.findUnique({
+        where: { name: product.category },
+      });
+
+      if (!category) {
+        console.error(`Category ${product.category} not found for product ${product.title}`);
+        continue;
+      }
+
+      await prisma.product.upsert({
+        where: { slug: product.slug }, // Use the slug as a unique identifier
+        update: {}, // Don't update existing products
+        create: {
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          rating: product.rating,
+          description: product.description,
+          mainImage: product.mainImage,
+          slug: product.slug,
+          manufacturer: product.manufacturer,
+          categoryId: category.id, // Connect to the existing category
+          inStock: product.inStock,
+        },
+      });
+    }
+    console.log("Demo products inserted successfully!");
   } catch (error) {
-    console.error("Error inserting data:", error);
+    console.error("Error inserting demo data:", error);
   } finally {
-    await prisma.$disconnect();  // Ensure the Prisma client disconnects after execution
+    await prisma.$disconnect(); // Ensure Prisma disconnects after execution
   }
 }
+
+insertDemoData();
